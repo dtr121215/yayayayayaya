@@ -20,7 +20,7 @@ const GAME_DEFS = {
     subtitle: '15×15 전통 바둑판 오목',
     badge: '15×15 격자',
     desc: '가로, 세로, 대각선으로 5개의 돌을 먼저 이으면 승리합니다. (쌍삼 금수 제외)',
-    image: '/src/assets/images/boardgame_omok_preview_1790816941752.jpg',
+    image: '/images/boardgame_omok_preview_1790816941752.jpg',
     playerNames: {
       pvp: { p1: '흑돌 (선공)', p2: '백돌 (후공)' },
       ai: { p1: '나 (흑돌)', p2: '컴퓨터 (백돌)' }
@@ -33,7 +33,7 @@ const GAME_DEFS = {
     subtitle: '3×3 클래식 틱택토',
     badge: '3×3 격자 · 미니맥스',
     desc: '3개의 말을 먼저 한 줄로 만드는 클래식 두뇌 게임입니다.',
-    image: '/src/assets/images/boardgame_tictactoe_preview_1790816952974.jpg',
+    image: '/images/boardgame_tictactoe_preview_1790816952974.jpg',
     playerNames: {
       pvp: { p1: 'O (선공)', p2: 'X (후공)' },
       ai: { p1: '나 (O)', p2: '컴퓨터 (X)' }
@@ -46,7 +46,7 @@ const GAME_DEFS = {
     subtitle: '7열 6행 중력 낙하 사목',
     badge: '7열 6행 · 낙하 물리',
     desc: '열을 탭하여 토큰을 떨어뜨리고, 4개를 먼저 연속으로 연결하면 승리합니다.',
-    image: '/src/assets/images/boardgame_connectfour_preview_1790816963833.jpg',
+    image: '/images/boardgame_connectfour_preview_1790816963833.jpg',
     playerNames: {
       pvp: { p1: '빨강 (선공)', p2: '노랑 (후공)' },
       ai: { p1: '나 (빨강)', p2: '컴퓨터 (노랑)' }

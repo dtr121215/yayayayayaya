@@ -11,13 +11,13 @@
   "theme_color": "#d97706",
   "icons": [
     {
-      "src": "/src/assets/images/boardgame_app_icon_1790816929463.jpg",
+      "src": "/images/boardgame_app_icon_1790816929463.jpg",
       "sizes": "192x192",
       "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/src/assets/images/boardgame_app_icon_1790816929463.jpg",
+      "src": "/images/boardgame_app_icon_1790816929463.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any"
