@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------
+   기본 브라우저 리셋 및 모바일 터치 최적화
+---------------------------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1c1917; /* stone-900 */
+  color: #f5f5f4;            /* stone-100 */
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------
+   오목 (Gomoku) 15x15 바둑판 스타일링
+---------------------------------------------------- */
+.gomoku-board {
+  background: linear-gradient(135deg, #e5ad65 0%, #d4984f 50%, #c4863c 100%);
+  border: 4px solid #8c5a24;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(115, 68, 18, 0.4);
+  padding: 8px;
+}
+
+/* 바둑판 교차선 배경 */
+.gomoku-cell {
+  position: relative;
+}
+
+/* 십자선 그리기 (선 중심 정렬) */
+.gomoku-cell::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(92, 51, 15, 0.75);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.gomoku-cell::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(92, 51, 15, 0.75);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* 가장자리 선 조정 (외곽선 삐져나가지 않도록) */
+.gomoku-cell[data-row="0"]::after { top: 50%; }
+.gomoku-cell[data-row="14"]::after { bottom: 50%; }
+.gomoku-cell[data-col="0"]::before { left: 50%; }
+.gomoku-cell[data-col="14"]::before { right: 50%; }
+
+/* 화점(Star point) 점 */
+.gomoku-star-point {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #5c330f;
+  z-index: 1;
+}
+
+/* 바둑돌 기본 원형체 */
+.gomoku-stone {
+  position: relative;
+  z-index: 2;
+  width: 86%;
+  height: 86%;
+  border-radius: 50%;
+  transition: transform 0.15s ease-out;
+}
+
+/* 흑돌 (깊은 먹색 + 상단 광택) */
+.stone-black {
+  background: radial-gradient(circle at 35% 35%, #52525b 0%, #27272a 45%, #09090b 100%);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6), inset 0 -1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* 백돌 (은은한 백자색 + 부드러운 음영) */
+.stone-white {
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f4f4f5 55%, #d4d4d8 100%);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* 모바일 1차 탭 미리보기 고스트 스톤 (반투명) */
+.stone-ghost {
+  opacity: 0.65;
+  filter: drop-shadow(0 0 4px #f59e0b);
+  animation: pulseGhost 1.2s infinite alternate;
+}
+
+@keyframes pulseGhost {
+  0% { transform: scale(0.85); opacity: 0.5; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* 2차 탭 유도 링 핑 */
+.stone-pending-ping {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  border: 2px solid #f59e0b;
+  animation: pendingPing 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes pendingPing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* 마지막 수 표시 마커 */
+.stone-last-move::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  box-shadow: 0 0 3px rgba(239, 68, 68, 0.8);
+}
+
+/* 승리한 돌 강조 */
+.stone-winning {
+  box-shadow: 0 0 10px #fbbf24, 0 0 20px #f59e0b !important;
+  z-index: 4;
+}
+
+/* ----------------------------------------------------
+   사목 (Connect 4) 낙하 애니메이션
+---------------------------------------------------- */
+.animate-drop-bounce {
+  animation: dropBounce 0.42s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes dropBounce {
+  0% {
+    transform: translateY(-260%);
+    opacity: 0;
+  }
+  65% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  82% {
+    transform: translateY(-12%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------------------------------
+   틱택토 및 공통 애니메이션
+---------------------------------------------------- */
+.animate-scale-in {
+  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-bounce-short {
+  animation: bounceShort 0.4s ease-out;
+}
+
+@keyframes bounceShort {
+  0% { transform: translate(-50%, 20px); opacity: 0; }
+  60% { transform: translate(-50%, -5px); opacity: 1; }
+  100% { transform: translate(-50%, 0); opacity: 1; }
+}

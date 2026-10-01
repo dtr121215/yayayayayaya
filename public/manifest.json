@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "미니 보드게임 모음",
+  "short_name": "미니보드게임",
+  "description": "앱 설치 없이 바로 즐기는 미니 보드게임 모음 - 오목, 틱택토, 사목",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1c1917",
+  "theme_color": "#d97706",
+  "icons": [
+    {
+      "src": "/src/assets/images/boardgame_app_icon_1790816929463.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/src/assets/images/boardgame_app_icon_1790816929463.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

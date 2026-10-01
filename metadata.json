@@ -1,0 +1,8 @@
+{
+  "name": "미니 보드게임 모음",
+  "description": "앱 설치 없이 모바일 브라우저에서 바로 즐기는 미니 보드게임 모음. 오목, 틱택토, 사목을 친구나 컴퓨터와 함께 플레이해보세요.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
